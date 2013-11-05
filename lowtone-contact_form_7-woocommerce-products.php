@@ -42,7 +42,7 @@ namespace lowtone\contact_form_7\woocommerce\products {
 
 					wp_enqueue_style("chosen");
 
-					wpcf7_add_shortcode("woocommerce_products", function($tag) {var_dump(debug_backtrace());exit;
+					wpcf7_add_shortcode("woocommerce_products", function($tag) {
 						wp_enqueue_script("lowtone_contact_form_7_woocommerce_products");
 
 						$tag["options"][] = "multiple";
