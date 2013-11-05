@@ -26,12 +26,18 @@ namespace lowtone\contact_form_7\woocommerce\products {
 		return trigger_error("Lowtone Content plugin is required", E_USER_ERROR) && false;
 
 	$__i = Package::init(array(
-			Package::INIT_PACKAGES => array("lowtone\\scripts\\chosen\\ajax"),
+			// Package::INIT_PACKAGES => array("lowtone\\scripts\\chosen\\ajax"),
 			Package::INIT_SUCCESS => function() {
 
 				add_action("init", function() {
 
-					wp_register_script("lowtone_contact_form_7_woocommerce_products", plugins_url("/assets/scripts/jquery-contact_form_7-woocommerce-products.js", __FILE__), array("ajax-chosen"));
+					wp_register_script("chosen-1.0.0", LIB_URL . "/lowtone-scripts-chosen/assets/scripts/chosen.jquery.min.js", array("jquery"));
+
+					wp_register_script("ajax-chosen-1.0.0", LIB_URL . "/lowtone-scripts-chosen-ajax/assets/scripts/ajax-chosen.min.js", array("chosen-1.0.0"));
+
+					wp_enqueue_style("chosen-1.0.0", LIB_URL . "/lowtone-scripts-chosen/assets/styles/chosen.min.css");
+
+					wp_register_script("lowtone_contact_form_7_woocommerce_products", plugins_url("/assets/scripts/jquery-contact_form_7-woocommerce-products.js", __FILE__), array("ajax-chosen-1.0.0"));
 					wp_localize_script("lowtone_contact_form_7_woocommerce_products", "lowtone_contact_form_7_woocommerce_products", array(
 							"ajaxurl" => admin_url("admin-ajax.php"),
 							"keepTypingMsg" => __("Keep typing...", "lowtone_contact_form_7_woocommerce_products"),
@@ -40,9 +46,9 @@ namespace lowtone\contact_form_7\woocommerce\products {
 
 					// Manually enqueue style because script is included in footer
 
-					wp_enqueue_style("chosen");
+					// wp_enqueue_style("chosen");
 
-					wpcf7_add_shortcode("woocommerce_products", function($tag) {var_dump(debug_backtrace());exit;
+					wpcf7_add_shortcode("woocommerce_products", function($tag) {
 						wp_enqueue_script("lowtone_contact_form_7_woocommerce_products");
 
 						$tag["options"][] = "multiple";
