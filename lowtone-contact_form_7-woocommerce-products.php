@@ -66,7 +66,7 @@ namespace lowtone\contact_form_7\woocommerce\products {
 				});
 
 				add_filter("wpcf7_posted_data", function($data) {
-					global $wpcf7_contact_form;
+					$wpcf7_contact_form = \WPCF7_ContactForm::get_current();
 
 					foreach ($wpcf7_contact_form->form_scan_shortcode() as $input) {
 						if ("woocommerce_products" != $input["type"])
