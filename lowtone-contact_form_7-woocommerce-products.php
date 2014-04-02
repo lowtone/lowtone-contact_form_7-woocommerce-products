@@ -30,6 +30,8 @@ namespace lowtone\contact_form_7\woocommerce\products {
 			Package::INIT_SUCCESS => function() {
 
 				add_action("init", function() {
+					if (!function_exists("wpcf7_add_shortcode"))
+						return;
 
 					wp_register_script("chosen-1.0.0", LIB_URL . "/lowtone-scripts-chosen/assets/scripts/chosen.jquery.min.js", array("jquery"));
 
